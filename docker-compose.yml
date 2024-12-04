@@ -1,0 +1,29 @@
+services:
+  laravel-docker:
+    container_name: blog
+    build: .
+    volumes:
+      - ./blog:/var/www/html
+    ports:
+      - 8000:80
+
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blog
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - 9000:80
+    environment:
+      - PMA_ARBITRARY=1
+
+  redis:
+    image: redis:latest
+    container_name: redis_blog_container
+    ports:
+      - 6379:6379
